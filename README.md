@@ -8,8 +8,8 @@ This repository contains the top-level CPU design, hardware submodules, custom I
 
 ## 👨‍💻 Author
 
-- **Mohammadmehdi Fotouhi Firouzabad**  
-  - 5th Semester Electrical Engineering Student, Sharif University of Technology  
+- **Mohammad Mehdi Fotouhi**  
+  - Electrical Engineering Student, Sharif University of Technology  
 
 ---
 
@@ -42,7 +42,7 @@ This repository contains the top-level CPU design, hardware submodules, custom I
 
 ## ⚡ Flag System & Condition Codes
 
-Every instruction contains a 2-bit **Condition Code (`CC`)** at bits `[15:14]`. The processor checks `CC` against the current **Flag Register**:
+Every instruction contains a 2-bit **Condition Code (`CC`)** at bits . The processor checks `CC` against the current **Flag Register**:
 
 | CC | Mnemonic | Condition | Description |
 | :---: | :---: | :---: | :--- |
@@ -78,16 +78,16 @@ The processor supports 16 instructions categorized into 6 formats:
 | `0010` | `AND` | R | $R_d = R_{s1} \ \& \ R_{s2}$ |
 | `0011` | `OR` | R | $R_d = R_{s1} \ \Vert{} \ R_{s2}$ |
 | `0100` | `XOR` | R | $R_d = R_{s1} \ \oplus \ R_{s2}$ |
-| `0101` | `SHL` | R | Shift Left $R_{s1}$ by $R_{s2}[3:0]$ |
-| `0110` | `SHR` | R | Shift Right $R_{s1}$ by $R_{s2}[3:0]$ |
+| `0101` | `SHL` | R | Shift Left $R_{s1}$ by $R_{s2}$ |
+| `0110` | `SHR` | R | Shift Right $R_{s1}$ by $R_{s2}$ |
 | `0111` | `ADDI` | I | $R_d = R_{s1} + \text{sext}(imm_4)$ |
 | `1000` | `LW` | I | $R_d = \text{DMEM}[R_{s1} + \text{sext}(imm_4)]$ |
 | `1001` | `SW` | I | $\text{DMEM}[R_{s1} + \text{sext}(imm_4)] = R_{s2}$ |
 | `1010` | `MOVI` | U | $R_d = \text{sext}(imm_7)$ |
-| `1011` | `LUI` | U | $R_d[15:9] = imm_7, \ R_d[8:0] = 0$ |
+| `1011` | `LUI` | U | $R_d = imm_7, \ R_d = 0$ |
 | `1100` | `B` | B | If $CC$ met: $PC = PC + 1 + \text{sext}(offset_{10})$ |
 | `1101` | `JAL` | J | If $CC$ met: $R_7 = PC + 1$, $PC = PC + 1 + \text{sext}(offset_{10})$ |
-| `1110` | `JR` | JR | If $CC$ met: $PC = R_{s1}[7:0]$ |
+| `1110` | `JR` | JR | If $CC$ met: $PC = R_{s1}$ |
 | `1111` | `NOP` | SYS | Increments $PC$ by 1 |
 
 ---
@@ -96,13 +96,10 @@ The processor supports 16 instructions categorized into 6 formats:
 
 The project is structured hierarchically into separate `.dig` files:
 
-1. **Top-Level CPU (`NN_CPU.dig`)**: Main processor circuit connecting all components and debug pins.
-2. **Register File (`regfile.dig`)**: 8x16-bit register file with two read ports, one write port, and debug routing.
-3. **ALU (`alu.dig`)**: Implements arithmetic, logic, and shift operations, and generates $Z, N, C, V$ flags.
-4. **Control Unit (`control_unit.dig`)**: Control logic that decodes instruction opcodes into control signals.
-5. **Condition Checker (`condition_checker.dig`)**: Evaluates instruction `CC` against current flags to generate the `cond_met` signal.
-6. **Sign Extender (`sign_extender.dig`)**: Extends 4-bit, 7-bit, and 10-bit values to 16-bit signed format.
-
+1. **Top-Level CPU (`Main_CPU.dig`)**: Main processor circuit connecting all components and debug pins.
+2. **Register File (`RegisterFile.dig`)**: 8x16-bit register file with two read ports, one write port, and debug routing.
+3. **ALU (`ALU.dig`)**: Implements arithmetic, logic, and shift operations, and generates $Z, N, C, V$ flags.
+4. **Control Unit (`ControlUnit.dig`)**: Control logic that decodes instruction opcodes into control signals.
 ---
 
 ## 🔌 Debug Interface
@@ -117,7 +114,7 @@ The top-level CPU schematic includes standard debug pins required for inspection
 ## 🚀 How to Run & Test
 
 1. **Prerequisites**: Download and install [Digital Simulator](https://github.com/hneemann/Digital).
-2. **Open the Circuit**: Launch **Digital** and open the main CPU circuit file (`src/NN_CPU.dig`).
+2. **Open the Circuit**: Launch **Digital** and open the main CPU circuit file (`src/Main_CPU.dig`).
 3. **Run Tests**:
    - Press **`F8`** (or go to **Simulation → Test component**) inside the simulator window to execute all built-in test cases automatically.
    - Verify that all test assertions pass.
@@ -131,10 +128,9 @@ The top-level CPU schematic includes standard debug pins required for inspection
 ├── docs/                       # Project specification document
 │   └── CS_Project_Specification.pdf
 ├── src/                        # Digital schematic circuit files (.dig)
-│   ├── NN_CPU.dig              # Top-level CPU schematic
-│   ├── alu.dig                 # ALU submodule
-│   ├── regfile.dig             # Register File submodule
-│   ├── control_unit.dig        # Control Unit submodule
-│   ├── condition_checker.dig   # Condition Evaluator
-│   └── sign_extender.dig       # Sign Extender module
+│   ├── Main_CPU.dig              # Top-level CPU schematic
+│   ├── ALU.dig                 # ALU submodule
+│   ├── RegisterFile.dig             # Register File submodule
+│   ├── ControlUnit.dig        # Control Unit submodule
+├── tests/                      # Automated test suites (.dig)
 └── README.md                   # Project documentation
