@@ -9,8 +9,8 @@ This repository contains the top-level CPU design, hardware submodules, custom I
 ## 👨‍💻 Author
 
 - **Mohammad Mehdi Fotouhi**  
-  - Electrical Engineering Student, Sharif University of Technology  
-
+  - Electrical Engineering Student, Sharif University of Technology
+  - 
 ---
 
 ## 📌 Project Overview
