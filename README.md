@@ -1,6 +1,6 @@
 # 16-PARS: 16-Bit Single-Cycle Processor Design
 
-A custom 16-bit single-cycle processor designed and simulated using the **Digital** logic simulator for the Computer Architecture course at Sharif University of Technology.
+A custom 16-bit single-cycle processor designed and simulated using the **Digital** logic simulator for the Computer Architecture course at Sharif University of Technology.  
 
 This repository contains the top-level CPU design, hardware submodules, custom Instruction Set Architecture (ISA) specifications, and built-in test components.
 
