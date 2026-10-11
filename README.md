@@ -75,7 +75,7 @@ The processor supports 16 instructions categorized into 6 formats:
 | :---: | :--- | :---: | :--- |
 | `0000` | `ADD` | R | $R_d = R_{s1} + R_{s2}$ |
 | `0001` | `SUB` | R | $R_d = R_{s1} - R_{s2}$ (Used for `CMP` when $R_d = R_0$) |
-| `0010` | `AND` | R | $R_d = R_{s1} \ \& \ R_{s2}$ |
+| `0010` | `AND` | R | $R_d = R_{s1} \ & \ R_{s2}$ |
 | `0011` | `OR` | R | $R_d = R_{s1} \ \Vert{} \ R_{s2}$ |
 | `0100` | `XOR` | R | $R_d = R_{s1} \ \oplus \ R_{s2}$ |
 | `0101` | `SHL` | R | Shift Left $R_{s1}$ by $R_{s2}$ |
